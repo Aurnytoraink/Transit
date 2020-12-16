@@ -1,0 +1,7 @@
+data/com.github.Aurnytoraink.Transit.desktop.in
+data/com.github.Aurnytoraink.Transit.appdata.xml.in
+data/com.github.Aurnytoraink.Transit.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
