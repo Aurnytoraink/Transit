@@ -37,11 +37,11 @@ class TransitWindow(Handy.ApplicationWindow):
         self.task_helper = TaskHelper()
 
     def show_lines(self,lines):
-        for i in range(len(lines))  :
-            box = LinesRow(lines[i])
-            self.flowbox.insert(box,i)
-
-    def get_lines(self,*_):
         for child in self.flowbox.get_children():
             child.destroy()
+        for i in range(len(lines))  :
+            box = LinesRow(lines[i])
+            self.flowbox.add(box)
+
+    def get_lines(self,*_):
         self.thread = self.task_helper.run(self.session.get_lines,"bus",callback=(self.show_lines,))

@@ -17,17 +17,20 @@
 
 from gi.repository import Gtk
 
-class LinesRow(Gtk.Box):
+class LinesRow(Gtk.FlowBoxChild):
 
     def __init__(self, item):
-        Gtk.Box.__init__(self)
+        Gtk.FlowBoxChild.__init__(self)
+        self.box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
         self.code = Gtk.Label.new()
         self.code.set_markup(item.code)
         self.code.show()
         self.name = Gtk.Label.new()
         self.name.set_markup(item.name)
         self.name.show()
-        self.add(self.code)
-        self.add(self.name)
+        self.box.add(self.code)
+        self.box.add(self.name)
+        self.box.show()
+        self.add(self.box)
         self.show()
         self.get_style_context().add_class(f"B_{item.code}")

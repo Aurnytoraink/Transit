@@ -5,6 +5,8 @@
   <requires lib="libhandy" version="1.0"/>
   <template class="TransitWindow" parent="HdyApplicationWindow">
     <property name="can_focus">False</property>
+    <property name="default_width">500</property>
+    <property name="default_height">475</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
