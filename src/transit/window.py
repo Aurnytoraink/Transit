@@ -28,6 +28,7 @@ class TransitWindow(Handy.ApplicationWindow):
 
     viewport = Gtk.Template.Child()
     reload_btn = Gtk.Template.Child()
+    headerbar = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -35,8 +36,11 @@ class TransitWindow(Handy.ApplicationWindow):
         
         self.session = RTM(self)
         self.task_helper = TaskHelper()
-        self.lines_listbox = LinesListBox()
+        self.lines_listbox = LinesListBox(self)
         self.viewport.add(self.lines_listbox)
+
+        self.headerbar.get_style_context().save()
+        self.reload_btn.get_style_context().save()
 
     def show_lines(self,lines):
         for child in self.lines_listbox.get_children():

@@ -22,13 +22,13 @@ class LinesRow(Gtk.ListBoxRow):
     def __init__(self, item):
         Gtk.ListBoxRow.__init__(self)
         self.box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
-        self.code = Gtk.Label.new()
-        self.code.set_markup(f"<span size='x-large' font_weight='ultrabold'>{item.code}</span>")
-        self.code.show()
+        self.code_label = Gtk.Label.new()
+        self.code_label.set_markup(f"<span size='x-large' font_weight='ultrabold'>{item.code}</span>")
+        self.code_label.show()
         self.name = Gtk.Label.new()
         self.name.set_markup(f"<span font_weight='bold'>{item.name}</span>")
         self.name.show()
-        self.box.add(self.code)
+        self.box.add(self.code_label)
         self.box.add(self.name)
         self.box.set_border_width(5)
         self.box.show()
@@ -36,15 +36,23 @@ class LinesRow(Gtk.ListBoxRow):
         self.show()
         self.get_style_context().add_class(f"B_{item.code}")
 
-        self.shortname = f"{item.code} {item.name}"
+        self.item = item
 
 class LinesListBox(Gtk.ListBox):
 
-    def __init__(self):
+    def __init__(self,app):
+        self.app = app
+        self.old_class = ""
         Gtk.ListBox.__init__(self)
         self.connect("row-activated",self._on_child_clicked)
         self.show()
 
     def _on_child_clicked(self,arg,row):
         # row = self.get_activate_on_single_click()
-        print(row.shortname)
+        self.app.headerbar.set_title(f"{row.item.code} {row.item.name}")
+
+        self.app.headerbar.get_style_context().remove_class(self.old_class)
+        self.app.reload_btn.get_style_context().remove_class(self.old_class)
+        self.app.headerbar.get_style_context().add_class(f"B_{row.item.code}")
+        self.app.reload_btn.get_style_context().add_class(f"B_{row.item.code}")
+        self.old_class = f"B_{row.item.code}"
