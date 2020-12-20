@@ -44,16 +44,12 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkViewport" id="viewport">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkFlowBox" id="flowbox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="max_children_per_line">1</property>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
             </child>

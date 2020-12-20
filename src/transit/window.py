@@ -18,7 +18,7 @@
 from sys import setdlopenflags
 from gi.repository import Gtk, Handy
 from threading import Thread
-from transit.lines_row import LinesRow
+from transit.lines_row import LinesRow, LinesListBox
 from transit.api.rtm import RTM
 from transit.task import TaskHelper
 
@@ -26,7 +26,7 @@ from transit.task import TaskHelper
 class TransitWindow(Handy.ApplicationWindow):
     __gtype_name__ = 'TransitWindow'
 
-    flowbox = Gtk.Template.Child()
+    viewport = Gtk.Template.Child()
     reload_btn = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -35,13 +35,15 @@ class TransitWindow(Handy.ApplicationWindow):
         
         self.session = RTM(self)
         self.task_helper = TaskHelper()
+        self.lines_listbox = LinesListBox()
+        self.viewport.add(self.lines_listbox)
 
     def show_lines(self,lines):
-        for child in self.flowbox.get_children():
+        for child in self.lines_listbox.get_children():
             child.destroy()
         for i in range(len(lines))  :
             box = LinesRow(lines[i])
-            self.flowbox.add(box)
+            self.lines_listbox.add(box)
 
     def get_lines(self,*_):
         self.thread = self.task_helper.run(self.session.get_lines,"bus",callback=(self.show_lines,))

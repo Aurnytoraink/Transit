@@ -17,20 +17,34 @@
 
 from gi.repository import Gtk
 
-class LinesRow(Gtk.FlowBoxChild):
+class LinesRow(Gtk.ListBoxRow):
 
     def __init__(self, item):
-        Gtk.FlowBoxChild.__init__(self)
+        Gtk.ListBoxRow.__init__(self)
         self.box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL,5)
         self.code = Gtk.Label.new()
-        self.code.set_markup(item.code)
+        self.code.set_markup(f"<span size='x-large' font_weight='ultrabold'>{item.code}</span>")
         self.code.show()
         self.name = Gtk.Label.new()
-        self.name.set_markup(item.name)
+        self.name.set_markup(f"<span font_weight='bold'>{item.name}</span>")
         self.name.show()
         self.box.add(self.code)
         self.box.add(self.name)
+        self.box.set_border_width(5)
         self.box.show()
         self.add(self.box)
         self.show()
         self.get_style_context().add_class(f"B_{item.code}")
+
+        self.shortname = f"{item.code} {item.name}"
+
+class LinesListBox(Gtk.ListBox):
+
+    def __init__(self):
+        Gtk.ListBox.__init__(self)
+        self.connect("row-activated",self._on_child_clicked)
+        self.show()
+
+    def _on_child_clicked(self,arg,row):
+        # row = self.get_activate_on_single_click()
+        print(row.shortname)
