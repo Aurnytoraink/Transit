@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <requires lib="libhandy" version="0.0"/>
+  <requires lib="libhandy" version="1.0"/>
   <template class="TransitWindow" parent="HdyApplicationWindow">
     <property name="can_focus">False</property>
     <child>
@@ -17,7 +17,18 @@
             <property name="title" translatable="yes">Transit</property>
             <property name="show_close_button">True</property>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="reload_btn">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">emblem-synchronizing-symbolic</property>
+                  </object>
+                </child>
+              </object>
             </child>
           </object>
           <packing>
@@ -27,14 +38,23 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="scale" value="2"/>
-            </attributes>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <object class="GtkFlowBox" id="flowbox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="max_children_per_line">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">True</property>

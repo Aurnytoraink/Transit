@@ -41,6 +41,11 @@ class Application(Gtk.Application):
             win = TransitWindow(application=self)
         win.present()
 
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_resource('/com/github/Aurnytoraink/Transit/css/style.css')
+        Gtk.StyleContext.add_provider_for_screen(
+            win.get_screen(), css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 def main(version):
     app = Application()
