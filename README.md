@@ -6,7 +6,7 @@
   Transit
 </h1>
 
-<p align="center"><strong>Get schedules for trains, buses, subways, etc.</strong></p>
+<p align="center"><strong>A companion for public transport</strong></p>
 
 <br>
 
