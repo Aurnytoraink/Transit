@@ -6,7 +6,7 @@
   Transit
 </h1>
 
-<p align="center"><strong>An Instagram & Pixelfed client for GNOME</strong></p>
+<p align="center"><strong>Get schedules for trains, buses, subways, etc.</strong></p>
 
 <br>
 
