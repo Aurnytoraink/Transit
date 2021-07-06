@@ -1,6 +1,6 @@
-# models.py
+# window.py
 #
-# Copyright 2020 Aurnytoraink
+# Copyright 2021 Aurnytoraink
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# from transit.api.help_request import Request
-# from help_request import Request
+from gi.repository import Gtk
 
-class Lignes():
-    def __init__(self,item):
-        self.id = item["id"]
-        self.type = item["sqliType"]
-        self.name = item["name"]
-        self.code = item["PublicCode"]
-        self.color = item["color"]
-        self.is_night = item["night"]
+
+@Gtk.Template(resource_path='/com/github/Aurnytoraink/Transit/ui/window.ui')
+class TransitWindow(Gtk.ApplicationWindow):
+    __gtype_name__ = 'TransitWindow'
+
+    label = Gtk.Template.Child()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)

@@ -1,12 +1,10 @@
 python = import('python')
-python3 = import('python3')
 
 conf = configuration_data()
 conf.set('PYTHON', python.find_installation('python3').path())
 conf.set('VERSION', meson.project_version())
 conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
-conf.set('pythondir', join_paths(get_option('prefix'), python3.sysconfig_path('purelib')))
 
 configure_file(
   input: 'transit.in',
@@ -16,4 +14,9 @@ configure_file(
   install_dir: get_option('bindir')
 )
 
-install_subdir('transit', install_dir: join_paths(get_option('prefix'), python3.sysconfig_path('purelib')))
+transit_sources = [
+  'main.py',
+  'window.py',
+]
+
+install_data(transit_sources, install_dir: moduledir)

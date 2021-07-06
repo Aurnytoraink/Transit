@@ -1,3 +1,5 @@
+subdir('icons/logo')
+
 desktop_file = i18n.merge_file(
   input: 'com.github.Aurnytoraink.Transit.desktop.in',
   output: 'com.github.Aurnytoraink.Transit.desktop',
@@ -5,6 +7,16 @@ desktop_file = i18n.merge_file(
   po_dir: '../po',
   install: true,
   install_dir: join_paths(get_option('datadir'), 'applications')
+)
+
+pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
+gnome = import('gnome')
+
+gnome.compile_resources('transit',
+  'transit.gresource.xml',
+  gresource_bundle: true,
+  install: true,
+  install_dir: pkgdatadir,
 )
 
 desktop_utils = find_program('desktop-file-validate', required: false)
@@ -39,14 +51,3 @@ if compile_schemas.found()
     args: ['--strict', '--dry-run', meson.current_source_dir()]
   )
 endif
-
-pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-moduledir = join_paths(pkgdatadir, 'transit')
-gnome = import('gnome')
-
-gnome.compile_resources('transit',
-  'transit.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)

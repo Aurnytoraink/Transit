@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2020 Aurnytoraink
+# Copyright 2021 Aurnytoraink
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,10 +18,9 @@
 import sys
 import gi
 
-gi.require_version('Gtk', '3.0')
-gi.require_version('Handy', '1')
+gi.require_version('Gtk', '4.0')
 
-from gi.repository import Gtk, Gio, Handy
+from gi.repository import Gtk, Gio
 
 from .window import TransitWindow
 
@@ -31,21 +30,12 @@ class Application(Gtk.Application):
         super().__init__(application_id='com.github.Aurnytoraink.Transit',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
 
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
-        Handy.init()
-
     def do_activate(self):
         win = self.props.active_window
         if not win:
             win = TransitWindow(application=self)
         win.present()
 
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_resource('/com/github/Aurnytoraink/Transit/css/style.css')
-        Gtk.StyleContext.add_provider_for_screen(
-            win.get_screen(), css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 def main(version):
     app = Application()
